@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.querydsl.core.types.Predicate;
@@ -39,13 +41,14 @@ import com.querydsl.core.types.Predicate;
  * @author Christoph Strobl
  * @author Oliver Gierke
  */
-@Controller
+@RepositoryRestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired) )
+@RequestMapping(value = "/a")
 class UserController {
 
 	private final UserRepository repository;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/b", method = RequestMethod.GET)
 	String index(Model model, //
 			@QuerydslPredicate(root = User.class) Predicate predicate, //
 			@PageableDefault(sort = { "lastname", "firstname" }) Pageable pageable, //
